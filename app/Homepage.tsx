@@ -137,7 +137,7 @@ export default function HomePage() {
 
                 <div>
                     {searchResults ? (
-                        <div className="xl:text-[3.6rem] flex items-center my-3 justify-between font-black Text1">
+                        <div className="xl:text-[3.6rem] text-[2rem] flex items-center my-3 justify-between font-black Text1">
                             <div className="flex items-start xl:leading-[3.3rem] flex-col">
                                 <div>{capitalizedWord}</div>
                                 <div className="text-[1rem] font-normal text-purple-600">
