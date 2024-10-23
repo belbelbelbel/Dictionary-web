@@ -4,6 +4,7 @@ import { BiBookAlt } from "react-icons/bi";
 import { LuSearch } from "react-icons/lu";
 import { FaPlay, FaPause } from "react-icons/fa"; 
 import { options } from "../app/API/GetMovies";
+import toast, { Toaster } from "react-hot-toast";
 
 interface Phonetic {
     text: string;
@@ -52,14 +53,14 @@ export default function HomePage() {
                 setSearchMeaning(data[0]?.meanings || []);
                 setSearchAudio(data[0]?.phonetics || []);
             } else {
-                alert("Error: No data found for the given word.");
+                // toast.error("Error: No data found for the given word.");
                 setSearchResults(null);
                 setSearchMeaning([]);
                 setSearchAudio([]);
             }
-        } catch (error) {
+        } catch (error:any) {
             console.error("Fetch error:", error);
-            alert(error);
+            // toast.error(error);
         } finally {
             setLoading(false);
         }
@@ -114,6 +115,10 @@ export default function HomePage() {
 
     return (
         <div className="text-black h-screen w-screen pt-[3rem]">
+            {
+                
+            }
+            <Toaster/>
             <div className="flex flex-col gap-4 justify-between xl:w-[51%] w-[85%] mx-auto">
                 <div className="flex justify-between items-center">
                     <a href="/"><BiBookAlt className="text-[2.7rem] text-black text-opacity-50 cursor-pointer" /></a>
@@ -128,7 +133,7 @@ export default function HomePage() {
                         onKeyDown={handleSave}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setWords(e.target.value)}
                         placeholder="Search..."
-                        className="xl:w-[80%] w-[90%] border-0 font-bold outline-0 bg-transparent"
+                        className="xl:w-[80%] w-[90%]   border-0 font-bold outline-0 bg-transparent"
                     />
                     <button disabled={words === ""} onClick={() => fetchWords(words)}>
                         <LuSearch className="cursor-pointer text-[1.3rem] text-purple-600" />
@@ -167,7 +172,7 @@ export default function HomePage() {
                     ) : (
                         <div>
                             <button className="text-gray-500 text-center text-sm">
-                                {!loading ? "No results found" : <div className="text-xl text-black text-center">loading...</div>}
+                                {!loading ? "No results found" : <div className="text-xl text-black text-center">Loading...</div>}
                             </button>
                         </div>
                     )}
